@@ -18,4 +18,44 @@ Content-Type: application/json
 {
     "turma_id":2
 }
+###
+POST http://localhost:3003/docente
+Content-Type: application/json
 
+{
+    "name": "sexto prof",
+    "email": "sexto@gmail.com",
+    "data_nasc": "13/02/02",
+    "turma_id": 1,
+    "especialidades": [1]
+}
+
+###
+GET http://localhost:3003/docente
+
+###
+PUT http://localhost:3003/docente/2
+Content-Type: application/json
+
+{
+    "turma_id": 2
+}
+
+###
+POST  http://localhost:3003/turma
+Content-Type: application/json
+
+{
+    "name": "ciclano"
+}
+
+###
+GET   http://localhost:3003/turma
+###
+PUT http://localhost:3003/turma/3
+Content-Type: application/json
+
+{
+    "modulo": 2
+}
+###

@@ -2,14 +2,14 @@ import express, { Express } from "express"
 import cors from "cors"
 import { AddressInfo } from "net";
 import ControllerEstudant from "./endpoints/ControllerEstudant";
+import app from "./app";
+import TurmaController from "./endpoints/Turma/TurmaController";
+import endpointDocente from "./endpoints/endpointDocente";
 
 
-const app: Express = express()
-app.use(express.json())
-app.use(cors())
-
-// instanciei a classe
 const estudantController = new ControllerEstudant()
+const turmaController = new TurmaController()
+const endpointsDocente = new endpointDocente()
 
 // metodo de cadastrar Usuario
 app.post("/estudant", estudantController.createEstudante)
@@ -22,25 +22,19 @@ app.put("/estudant/:id",estudantController.editEstudant)
 
 
 
+app.post("/docente", endpointsDocente.createDocente)
 
-const server = app.listen(process.env.PORT || 3003, () => {
-    if (server) {
-        const address = server.address() as AddressInfo;
-        console.log(`Server is running in http://localhost: ${address.port}`);
-    } else {
-        console.error(`Failure upon starting server.`);
-    }
-});
+app.get("/docente",endpointsDocente.getDocente)
+
+app.put("/docente/:id", endpointsDocente.editDocente)
 
 
+// Criar Turma
+app.post('/turma', turmaController.createTurma)
 
+// Acessar Turmas
+app.get('/turma', turmaController.getAllTurmas)
 
-
-
-
-
-
-
-
-
+// Editar Turma
+app.put('/turma/:id', turmaController.changeModulo)
 
