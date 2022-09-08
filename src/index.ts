@@ -1,10 +1,25 @@
+import express, { Express } from "express"
+import cors from "cors"
+import { AddressInfo } from "net";
+import ControllerEstudant from "./endpoints/ControllerEstudant";
 import app from "./app";
 import TurmaController from "./endpoints/Turma/TurmaController";
 import endpointDocente from "./endpoints/endpointDocente";
 
-const endpointsDocente = new endpointDocente()
-// Instancia de classe
+
+const estudantController = new ControllerEstudant()
 const turmaController = new TurmaController()
+const endpointsDocente = new endpointDocente()
+
+// metodo de cadastrar Usuario
+app.post("/estudant", estudantController.createEstudante)
+
+// metodo de buscar por todos os usuários
+app.get("/estudants/:name", estudantController.getEstudant)
+
+app.put("/estudant/:id",estudantController.editEstudant)
+
+
 
 
 app.post("/docente", endpointsDocente.createDocente)
